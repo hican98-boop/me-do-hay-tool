@@ -15,200 +15,246 @@
     :root {
       --primary: #ee4d2d;
       --primary-dark: #d73211;
-      --success: #10b981;
+      --success: #059669;
+      --fb: #1877f2;
       --text: #1f2937;
-      --text-light: #6b7280;
+      --muted: #6b7280;
       --card: #ffffff;
+      --line: #ffe4de;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: linear-gradient(165deg, #fff5f2 0%, #ffe4de 40%, #fff8f5 100%);
+      background: linear-gradient(165deg, #fff7f4 0%, #ffe8e1 45%, #fff9f6 100%);
       color: var(--text);
       min-height: 100vh;
-      padding: 16px 14px 48px;
+      padding: 14px 12px 40px;
       line-height: 1.5;
       overflow-x: hidden;
     }
     #glitter-canvas {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      position: fixed; inset: 0; width: 100%; height: 100%;
       pointer-events: none; z-index: 9999;
     }
     .container { max-width: 440px; margin: 0 auto; position: relative; z-index: 1; }
 
-    header { text-align: center; margin-bottom: 18px; padding-top: 6px; }
+    header { text-align: center; margin-bottom: 14px; padding-top: 4px; }
     .logo-wrap {
-      width: 100px; height: 100px; margin: 0 auto 12px;
+      width: 88px; height: 88px; margin: 0 auto 10px;
       animation: floatLogo 3.2s ease-in-out infinite;
     }
     .logo-wrap img {
       width: 100%; height: 100%; object-fit: contain; border-radius: 50%;
-      box-shadow: 0 10px 28px rgba(238,77,45,0.28);
+      box-shadow: 0 10px 26px rgba(238,77,45,0.28);
+      background: #fff;
     }
     header h1 {
-      font-size: 1.35rem; font-weight: 800; color: var(--primary); margin-bottom: 4px;
+      font-size: 1.28rem; font-weight: 800; color: var(--primary); margin-bottom: 4px;
     }
-    header p { font-size: 0.9rem; color: var(--text-light); }
+    header p { font-size: 0.88rem; color: var(--muted); }
 
-    /* Voucher chips */
     .voucher-row {
-      display: flex; gap: 8px; overflow-x: auto; padding: 4px 2px 14px;
-      margin-bottom: 4px; scrollbar-width: none;
+      display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 12px;
+      scrollbar-width: none; margin-bottom: 2px;
     }
     .voucher-row::-webkit-scrollbar { display: none; }
     .voucher-chip {
-      flex: 0 0 auto;
+      flex: 0 0 auto; min-width: 128px;
       background: linear-gradient(135deg, #fff, #fff5f2);
-      border: 1.5px dashed #fca5a5;
-      border-radius: 12px;
-      padding: 10px 14px;
-      min-width: 130px;
+      border: 1.5px dashed #fca5a5; border-radius: 14px;
+      padding: 10px 12px; cursor: pointer;
       box-shadow: 0 4px 12px rgba(238,77,45,0.08);
+      transition: transform .15s, box-shadow .15s;
     }
+    .voucher-chip:active { transform: scale(0.97); }
     .voucher-chip .tag {
-      font-size: 0.68rem; font-weight: 700; color: #b91c1c;
+      font-size: 0.66rem; font-weight: 800; color: #b91c1c;
       background: #fee2e2; display: inline-block;
-      padding: 2px 8px; border-radius: 20px; margin-bottom: 4px;
+      padding: 2px 8px; border-radius: 999px; margin-bottom: 4px;
     }
-    .voucher-chip .off {
-      font-size: 1.05rem; font-weight: 800; color: var(--primary);
-    }
-    .voucher-chip .desc {
-      font-size: 0.72rem; color: var(--text-light); margin-top: 2px;
-    }
+    .voucher-chip .off { font-size: 1rem; font-weight: 800; color: var(--primary); }
+    .voucher-chip .desc { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
 
     .card {
       background: var(--card);
       border-radius: 22px;
-      padding: 22px 18px;
-      margin-bottom: 14px;
-      box-shadow: 0 12px 36px rgba(238,77,45,0.1);
+      padding: 18px 16px 16px;
+      box-shadow: 0 12px 34px rgba(238,77,45,0.1);
       border: 1px solid rgba(238,77,45,0.1);
-    }
-    .card-title {
-      font-size: 1rem; font-weight: 800; color: var(--text);
-      margin-bottom: 6px; display: flex; align-items: center; gap: 8px;
-    }
-    .card-sub {
-      font-size: 0.84rem; color: var(--text-light); margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     .badge {
       display: inline-block;
       background: linear-gradient(135deg, #fee2e2, #fecaca);
-      color: #b91c1c;
-      font-size: 0.7rem; font-weight: 700;
-      padding: 4px 11px; border-radius: 20px; margin-bottom: 12px;
+      color: #b91c1c; font-size: 0.68rem; font-weight: 800;
+      padding: 4px 10px; border-radius: 999px; margin-bottom: 10px;
+      letter-spacing: 0.02em;
     }
+    .card-title {
+      font-size: 1.02rem; font-weight: 800; margin-bottom: 4px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .card-sub { font-size: 0.84rem; color: var(--muted); margin-bottom: 12px; }
 
-    label { display: block; font-size: 0.88rem; font-weight: 700; margin-bottom: 8px; }
+    .steps {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;
+      margin-bottom: 14px;
+    }
+    .step {
+      background: #fff7ed; border: 1px solid #fed7aa; border-radius: 12px;
+      padding: 9px 6px; text-align: center;
+    }
+    .step .n {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--primary); color: #fff;
+      font-size: 0.72rem; font-weight: 800;
+      display: inline-flex; align-items: center; justify-content: center;
+      margin-bottom: 3px;
+    }
+    .step .t { font-size: 0.7rem; color: #9a3412; font-weight: 700; line-height: 1.25; }
+
+    label { display: block; font-size: 0.86rem; font-weight: 700; margin-bottom: 7px; }
     .input-wrap { position: relative; }
     textarea {
-      width: 100%; padding: 14px 90px 14px 14px;
-      border: 2px solid #ffe4de; border-radius: 14px;
-      font-size: 0.95rem; background: #fffaf9;
-      min-height: 96px; resize: vertical; font-family: inherit;
-      transition: border-color 0.2s, box-shadow 0.2s; outline: none;
+      width: 100%; min-height: 92px; resize: vertical;
+      padding: 13px 86px 13px 13px;
+      border: 2px solid var(--line); border-radius: 14px;
+      font-size: 0.94rem; font-family: inherit;
+      background: #fffaf9; outline: none;
+      transition: border-color .2s, box-shadow .2s;
     }
     textarea:focus {
       border-color: var(--primary); background: #fff;
       box-shadow: 0 0 0 4px rgba(238,77,45,0.12);
     }
     .btn-paste {
-      position: absolute; top: 10px; right: 10px;
-      background: var(--primary); color: white; border: none;
+      position: absolute; top: 9px; right: 9px;
+      background: var(--primary); color: #fff; border: none;
       border-radius: 10px; padding: 8px 12px;
-      font-size: 0.82rem; font-weight: 700; cursor: pointer;
+      font-size: 0.8rem; font-weight: 800; cursor: pointer;
       box-shadow: 0 2px 8px rgba(238,77,45,0.3);
+    }
+
+    .hint {
+      margin-top: 8px; font-size: 0.78rem; color: var(--muted);
+      text-align: center;
     }
 
     .btn {
       display: flex; align-items: center; justify-content: center; gap: 8px;
-      width: 100%; padding: 15px; border: none; border-radius: 14px;
-      font-size: 1.02rem; font-weight: 700; cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
+      width: 100%; padding: 14px 12px; border: none; border-radius: 14px;
+      font-size: 1rem; font-weight: 800; cursor: pointer;
+      transition: transform .15s, box-shadow .15s, opacity .15s;
     }
     .btn:active { transform: scale(0.97); }
+    .btn:disabled { opacity: 0.7; cursor: wait; transform: none; }
     .btn-primary {
       background: linear-gradient(135deg, #ee4d2d, #ff6b4a);
-      color: white; margin-top: 14px;
-      box-shadow: 0 8px 22px rgba(238,77,45,0.35);
+      color: #fff; margin-top: 12px;
+      box-shadow: 0 8px 20px rgba(238,77,45,0.35);
     }
-    .btn-primary:hover { transform: translateY(-2px); }
-    .btn-primary:disabled { opacity: 0.7; cursor: wait; transform: none; }
-    .btn-success {
-      background: linear-gradient(135deg, #10b981, #34d399);
-      color: white; margin-top: 10px;
-      box-shadow: 0 6px 18px rgba(16,185,129,0.3);
+    .btn-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px;
+    }
+    .btn-shopee {
+      background: linear-gradient(135deg, #ee4d2d, #ff6b4a);
+      color: #fff; box-shadow: 0 5px 14px rgba(238,77,45,0.28);
     }
     .btn-fb {
       background: linear-gradient(135deg, #1877f2, #0d65d9);
-      color: white; margin-top: 10px;
-      box-shadow: 0 6px 18px rgba(24,119,242,0.3);
+      color: #fff; box-shadow: 0 5px 14px rgba(24,119,242,0.28);
+    }
+    .btn-copy {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: #fff; margin-top: 8px;
+      box-shadow: 0 5px 14px rgba(5,150,105,0.25);
     }
 
-    .result-box { display: none; margin-top: 18px; }
-    .result-box.show { display: block; }
+    .result-box {
+      display: none; margin-top: 16px;
+      padding-top: 14px; border-top: 1px dashed #fecaca;
+    }
+    .result-box.show { display: block; animation: fadeUp .28s ease; }
+    .copied-banner {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      background: #ecfdf5; color: #065f46;
+      border: 1px solid #a7f3d0; border-radius: 12px;
+      padding: 9px 12px; font-size: 0.86rem; font-weight: 700;
+      margin-bottom: 10px;
+    }
     .result-link {
       background: linear-gradient(135deg, #ecfdf5, #d1fae5);
       border: 2px solid #a7f3d0; border-radius: 14px;
-      padding: 14px; word-break: break-all;
-      font-size: 0.85rem; color: #065f46; margin-bottom: 12px;
-      position: relative; line-height: 1.45;
-    }
-    .result-link::before {
-      content: "✓"; position: absolute; top: -10px; right: 12px;
-      background: var(--success); color: white;
-      width: 22px; height: 22px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 700;
-    }
-
-    .steps {
-      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;
-      margin-bottom: 16px;
-    }
-    .step {
-      background: #fff7ed; border-radius: 12px; padding: 10px 8px;
-      text-align: center; border: 1px solid #fed7aa;
-    }
-    .step .n {
-      width: 22px; height: 22px; border-radius: 50%;
-      background: var(--primary); color: white;
-      font-size: 0.75rem; font-weight: 800;
-      display: inline-flex; align-items: center; justify-content: center;
+      padding: 12px; word-break: break-all;
+      font-size: 0.8rem; color: #065f46; line-height: 1.45;
       margin-bottom: 4px;
     }
-    .step .t { font-size: 0.72rem; color: #9a3412; font-weight: 600; line-height: 1.3; }
+
+    .voucher-schedule {
+      margin-top: 14px; padding: 14px 12px;
+      background: #fffaf9; border: 1px solid #fecaca;
+      border-radius: 16px; text-align: center;
+    }
+    .voucher-schedule .note {
+      color: #dc2626; font-size: 0.86rem; font-weight: 800; margin-bottom: 8px;
+    }
+    .voucher-schedule .label {
+      font-size: 0.86rem; margin-bottom: 10px;
+      display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap;
+    }
+    .voucher-schedule .slots {
+      display: flex; flex-wrap: wrap; gap: 7px; justify-content: center;
+    }
+    .voucher-schedule .slot {
+      min-width: 58px; padding: 7px 10px; border-radius: 999px;
+      background: #fff; border: 1.5px solid #e5e7eb;
+      font-size: 0.84rem; font-weight: 800; color: #6b7280;
+      transition: all .25s;
+    }
+    .voucher-schedule .slot.next {
+      background: linear-gradient(135deg, #ee4d2d, #ff6b4a);
+      border-color: #ee4d2d; color: #fff;
+      box-shadow: 0 4px 12px rgba(238,77,45,0.35);
+      transform: scale(1.06);
+    }
+    .voucher-schedule .slot.passed { opacity: 0.4; text-decoration: line-through; }
+    .voucher-schedule .now {
+      margin-top: 9px; font-size: 0.74rem; color: var(--muted);
+    }
 
     .tips {
-      font-size: 0.82rem; color: var(--text-light);
-      margin-top: 14px; padding: 12px 14px;
-      background: #fff7ed; border-radius: 12px;
+      margin-top: 12px; font-size: 0.8rem; color: var(--muted);
+      padding: 11px 12px; background: #fff7ed; border-radius: 12px;
       border-left: 4px solid #f97316; line-height: 1.5;
     }
     .tips strong { color: #c2410c; }
 
     footer {
-      text-align: center; margin-top: 20px;
-      font-size: 0.78rem; color: #b0a09a;
+      text-align: center; margin-top: 16px;
+      font-size: 0.76rem; color: #b0a09a;
     }
+    footer a { color: var(--primary); text-decoration: none; font-weight: 700; }
 
     .toast {
-      position: fixed; bottom: 28px; left: 50%;
+      position: fixed; bottom: 26px; left: 50%;
       transform: translateX(-50%) translateY(120px);
-      background: #1f2937; color: white;
-      padding: 12px 24px; border-radius: 50px;
-      font-size: 0.9rem; font-weight: 600;
-      opacity: 0; transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+      background: #111827; color: #fff;
+      padding: 11px 20px; border-radius: 999px;
+      font-size: 0.88rem; font-weight: 700;
+      opacity: 0; transition: all .32s cubic-bezier(0.34,1.56,0.64,1);
       z-index: 10000; pointer-events: none;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.22);
       max-width: 90%; text-align: center;
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
     @keyframes floatLogo {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -225,17 +271,17 @@
     </header>
 
     <div class="voucher-row">
-      <div class="voucher-chip">
+      <div class="voucher-chip" onclick="focusInput()">
         <div class="tag">HOT</div>
         <div class="off">Giảm đến 50%</div>
         <div class="desc">Deal đang chạy</div>
       </div>
-      <div class="voucher-chip">
+      <div class="voucher-chip" onclick="focusInput()">
         <div class="tag">FREESHIP</div>
         <div class="off">Freeship Xtra</div>
         <div class="desc">Đơn từ 0đ</div>
       </div>
-      <div class="voucher-chip">
+      <div class="voucher-chip" onclick="focusInput()">
         <div class="tag">VOUCHER</div>
         <div class="off">Ưu đãi Fanpage</div>
         <div class="desc">Đăng link để nhận</div>
@@ -245,12 +291,12 @@
     <div class="card">
       <div class="badge">MIỄN PHÍ • NHANH CHÓNG</div>
       <div class="card-title">🎯 Lấy link săn sale</div>
-      <div class="card-sub">Dán link sản phẩm Shopee (rút gọn hoặc đầy đủ)</div>
+      <div class="card-sub">Dán link Shopee (rút gọn hoặc đầy đủ)</div>
 
       <div class="steps">
-        <div class="step"><div class="n">1</div><div class="t">Dán link Shopee</div></div>
-        <div class="step"><div class="n">2</div><div class="t">Bấm lấy link</div></div>
-        <div class="step"><div class="n">3</div><div class="t">Copy & đăng</div></div>
+        <div class="step"><div class="n">1</div><div class="t">Dán link</div></div>
+        <div class="step"><div class="n">2</div><div class="t">Săn link</div></div>
+        <div class="step"><div class="n">3</div><div class="t">Copy / mở</div></div>
       </div>
 
       <label for="inputLink">Link sản phẩm Shopee</label>
@@ -262,26 +308,70 @@
       <button class="btn btn-primary" id="btnConvert" onclick="convertLink()">
         🔥 Săn Link Ưu Đãi
       </button>
+      <div class="hint">Dán link → bấm nút → link tự copy sẵn</div>
 
       <div class="result-box" id="resultBox">
-        <label style="margin-top:6px;">Link đã tối ưu — copy để đăng:</label>
+        <div class="copied-banner" id="copiedBanner">✅ Đã copy sẵn — dán vào Facebook/Zalo được ngay</div>
         <div class="result-link" id="resultLink"></div>
-        <button class="btn btn-success" onclick="copyResult()">📋 Sao chép link</button>
-        <button class="btn btn-fb" onclick="openFacebook()">📘 Mở Facebook Group</button>
+        <div class="btn-row">
+          <button class="btn btn-shopee" onclick="openShopee()">🛒 Mở Shopee</button>
+          <button class="btn btn-fb" onclick="copyAndOpenFacebook()">📤 Copy & FB</button>
+        </div>
+        <button class="btn btn-copy" onclick="copyResult()">📋 Sao chép lại link</button>
+      </div>
+
+      <div class="voucher-schedule" id="voucherSchedule">
+        <div class="note">Lỡ hết mã thì quay lại sau nhé</div>
+        <div class="label">Voucher thường có lại lúc <span style="color:#2563eb">→</span></div>
+        <div class="slots" id="voucherSlots"></div>
+        <div class="now" id="voucherNow"></div>
       </div>
 
       <div class="tips">
-        <strong>Mẹo:</strong> Dùng link này khi đăng Facebook/Zalo sẽ dễ bắt được voucher và ưu đãi hơn. Có thể dán cả link rút gọn.
+        <strong>Mẹo:</strong> Đăng link lên Facebook/Zalo rồi bấm từ đó vào Shopee sẽ dễ bắt voucher kênh hơn. Có thể dán cả link rút gọn.
       </div>
     </div>
 
-    <footer>Công cụ săn link ưu đãi Shopee • Mê Đồ Hay</footer>
+    <footer>
+      Công cụ săn link ưu đãi • <strong>Mê Đồ Hay</strong><br/>
+      <a href="https://www.facebook.com/groups/882275351249910" target="_blank" rel="noopener">Facebook Group</a>
+    </footer>
   </div>
 
   <div class="toast" id="toast">Đã sao chép!</div>
 
   <script>
     const API_URL = "https://shopee-aff2.hican98.workers.dev";
+    const FB_GROUP = "https://www.facebook.com/groups/882275351249910";
+    let lastAffLink = "";
+
+    function focusInput() {
+      const el = document.getElementById("inputLink");
+      el.focus();
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    function fastCopy(text) {
+      if (!text) return false;
+      try {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.setAttribute("readonly", "");
+        ta.style.cssText = "position:fixed;left:-9999px;top:0;opacity:0;";
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        ta.setSelectionRange(0, text.length);
+        const ok = document.execCommand("copy");
+        document.body.removeChild(ta);
+        if (ok) return true;
+      } catch (_) {}
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).catch(function(){});
+        return true;
+      }
+      return false;
+    }
 
     async function pasteLink() {
       try {
@@ -289,7 +379,7 @@
         if (text) {
           document.getElementById("inputLink").value = text.trim();
           showToast("Đã dán link!");
-          setTimeout(convertLink, 150);
+          setTimeout(convertLink, 80);
         } else showToast("Clipboard trống");
       } catch (e) {
         showToast("Không đọc được clipboard. Hãy nhấn giữ để dán");
@@ -298,7 +388,7 @@
 
     async function convertLink() {
       const raw = document.getElementById("inputLink").value.trim();
-      if (!raw) { showToast("Hãy dán link Shopee vào"); return; }
+      if (!raw) { showToast("Hãy dán link Shopee vào"); focusInput(); return; }
 
       const btn = document.getElementById("btnConvert");
       const old = btn.innerHTML;
@@ -316,14 +406,21 @@
         if (!res.ok || data.error) {
           showToast(data.error || "Có lỗi xảy ra");
           document.getElementById("resultBox").classList.remove("show");
+          lastAffLink = "";
           return;
         }
 
         if (data.affiliateLink) {
-          document.getElementById("resultLink").textContent = data.affiliateLink;
+          lastAffLink = data.affiliateLink;
+          document.getElementById("resultLink").textContent = lastAffLink;
           document.getElementById("resultBox").classList.add("show");
+          const copied = fastCopy(lastAffLink);
+          const banner = document.getElementById("copiedBanner");
+          banner.textContent = copied
+            ? "✅ Đã copy sẵn — dán vào Facebook/Zalo được ngay"
+            : "✅ Đã lấy link — bấm Sao chép nếu cần";
           document.getElementById("resultBox").scrollIntoView({ behavior: "smooth", block: "nearest" });
-          showToast("Đã lấy link ưu đãi!");
+          showToast(copied ? "Đã lấy link & copy sẵn!" : "Đã lấy link ưu đãi!");
         } else {
           showToast("Không nhận được link");
         }
@@ -336,29 +433,73 @@
     }
 
     function copyResult() {
-      const text = document.getElementById("resultLink").textContent;
-      if (!text) return;
-      navigator.clipboard.writeText(text).then(() => showToast("Đã sao chép link!"))
-        .catch(() => {
-          const ta = document.createElement("textarea");
-          ta.value = text; document.body.appendChild(ta); ta.select();
-          document.execCommand("copy"); document.body.removeChild(ta);
-          showToast("Đã sao chép link!");
-        });
+      const text = lastAffLink || document.getElementById("resultLink").textContent.trim();
+      if (!text) { showToast("Chưa có link"); return; }
+      showToast(fastCopy(text) ? "Đã sao chép link!" : "Không copy được");
     }
 
-    function openFacebook() {
-      window.open("https://www.facebook.com/groups/882275351249910", "_blank");
+    function openShopee() {
+      const link = lastAffLink || document.getElementById("resultLink").textContent.trim();
+      if (!link) { showToast("Chưa có link. Hãy săn link trước"); return; }
+      window.open(link, "_blank");
+    }
+
+    function copyAndOpenFacebook() {
+      const text = lastAffLink || document.getElementById("resultLink").textContent.trim();
+      if (!text) { showToast("Chưa có link. Hãy săn link trước"); return; }
+      fastCopy(text);
+      showToast("Đã copy — dán vào Facebook nhé!");
+      setTimeout(function(){ window.open(FB_GROUP, "_blank"); }, 40);
     }
 
     function showToast(msg) {
       const t = document.getElementById("toast");
       t.textContent = msg;
       t.classList.add("show");
-      setTimeout(() => t.classList.remove("show"), 2800);
+      clearTimeout(showToast._timer);
+      showToast._timer = setTimeout(function(){ t.classList.remove("show"); }, 2600);
     }
 
-    document.getElementById("inputLink").addEventListener("paste", () => setTimeout(convertLink, 120));
+    // Khung giờ voucher (GMT+7)
+    const VOUCHER_HOURS = [0, 9, 12, 15, 18, 20];
+    function getVNNow() {
+      return new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }));
+    }
+    function updateVoucherSchedule() {
+      const now = getVNNow();
+      const h = now.getHours();
+      const m = now.getMinutes();
+      const slotsEl = document.getElementById("voucherSlots");
+      const nowEl = document.getElementById("voucherNow");
+      if (!slotsEl) return;
+
+      let next = null;
+      for (let i = 0; i < VOUCHER_HOURS.length; i++) {
+        const hour = VOUCHER_HOURS[i];
+        if (h < hour || (h === hour && m === 0)) { next = hour; break; }
+      }
+      if (next === null) next = VOUCHER_HOURS[0];
+
+      slotsEl.innerHTML = VOUCHER_HOURS.map(function(hour) {
+        const label = String(hour).padStart(2, "0") + "h00";
+        let cls = "slot";
+        if (hour === next) cls += " next";
+        else if (next === VOUCHER_HOURS[0] && hour !== 0) cls += " passed";
+        else if (hour < h || (hour === h && m > 0 && hour !== next)) cls += " passed";
+        return '<div class="' + cls + '">' + label + "</div>";
+      }).join("");
+
+      const hh = String(h).padStart(2, "0");
+      const mm = String(m).padStart(2, "0");
+      const nextLabel = String(next).padStart(2, "0") + "h00";
+      nowEl.textContent = "Bây giờ: " + hh + ":" + mm + " (GMT+7) · Khung gần nhất: " + nextLabel;
+    }
+    updateVoucherSchedule();
+    setInterval(updateVoucherSchedule, 30000);
+
+    document.getElementById("inputLink").addEventListener("paste", function() {
+      setTimeout(convertLink, 100);
+    });
 
     // Glitter
     const canvas = document.getElementById("glitter-canvas");
@@ -366,33 +507,34 @@
     let particles = [];
     function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
     resize(); addEventListener("resize", resize);
-    class P {
-      constructor(x,y) {
-        this.x=x; this.y=y;
-        this.size=Math.random()*3+1.2;
-        this.sy=Math.random()*2+0.7;
-        this.sx=(Math.random()-0.5)*1.8;
-        this.life=1;
-        this.c=["#ffd700","#ff6b9d","#ff9f43","#fff","#ff6b4a","#f472b6"][Math.floor(Math.random()*6)];
-      }
-      update(){ this.y+=this.sy; this.x+=this.sx; this.life-=0.016; }
-      draw(){
-        ctx.save(); ctx.globalAlpha=Math.max(this.life,0);
-        ctx.fillStyle=this.c; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill();
-        ctx.strokeStyle=this.c; ctx.lineWidth=0.9;
-        ctx.beginPath();
-        ctx.moveTo(this.x-this.size*1.8,this.y); ctx.lineTo(this.x+this.size*1.8,this.y);
-        ctx.moveTo(this.x,this.y-this.size*1.8); ctx.lineTo(this.x,this.y+this.size*1.8);
-        ctx.stroke(); ctx.restore();
-      }
+    function P(x, y) {
+      this.x = x; this.y = y;
+      this.size = Math.random() * 3 + 1.1;
+      this.sy = Math.random() * 2 + 0.6;
+      this.sx = (Math.random() - 0.5) * 1.6;
+      this.life = 1;
+      this.c = ["#ffd700","#ff6b9d","#ff9f43","#fff","#ff6b4a","#f472b6"][Math.floor(Math.random()*6)];
     }
-    function spawn(x,y,n=2){ for(let i=0;i<n;i++) particles.push(new P(x+(Math.random()-0.5)*16,y+(Math.random()-0.5)*8)); }
-    addEventListener("mousemove", e => { if(Math.random()>0.35) spawn(e.clientX,e.clientY); });
-    addEventListener("touchmove", e => { if(e.touches[0]) spawn(e.touches[0].clientX,e.touches[0].clientY); }, {passive:true});
+    P.prototype.update = function(){ this.y += this.sy; this.x += this.sx; this.life -= 0.016; };
+    P.prototype.draw = function(){
+      ctx.save(); ctx.globalAlpha = Math.max(this.life, 0);
+      ctx.fillStyle = this.c; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill();
+      ctx.strokeStyle = this.c; ctx.lineWidth = 0.8;
+      ctx.beginPath();
+      ctx.moveTo(this.x - this.size*1.7, this.y); ctx.lineTo(this.x + this.size*1.7, this.y);
+      ctx.moveTo(this.x, this.y - this.size*1.7); ctx.lineTo(this.x, this.y + this.size*1.7);
+      ctx.stroke(); ctx.restore();
+    };
+    function spawn(x, y, n) {
+      n = n || 2;
+      for (let i = 0; i < n; i++) particles.push(new P(x + (Math.random()-0.5)*14, y + (Math.random()-0.5)*8));
+    }
+    addEventListener("mousemove", function(e){ if (Math.random() > 0.4) spawn(e.clientX, e.clientY); });
+    addEventListener("touchmove", function(e){ if (e.touches[0]) spawn(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
     (function loop(){
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      particles = particles.filter(p => p.life>0);
-      particles.forEach(p => { p.update(); p.draw(); });
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles = particles.filter(function(p){ return p.life > 0; });
+      for (let i = 0; i < particles.length; i++) { particles[i].update(); particles[i].draw(); }
       requestAnimationFrame(loop);
     })();
   </script>
