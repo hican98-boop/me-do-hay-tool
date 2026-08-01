@@ -196,11 +196,7 @@
       margin-bottom: 10px; text-align: center;
     }
     .result-link {
-      background: linear-gradient(135deg, #ecfdf5, #d1fae5);
-      border: 2px solid #a7f3d0; border-radius: 14px;
-      padding: 12px; word-break: break-all;
-      font-size: 0.8rem; color: #065f46; line-height: 1.45;
-      margin-bottom: 4px; font-weight: 500;
+      display: none !important; /* Ẩn link dài, không cho khách thấy */
     }
 
     .voucher-schedule {
@@ -325,7 +321,7 @@
       <div class="hint">Lấy xong là tự copy sẵn, chỉ việc dán đi dùng</div>
 
       <div class="result-box" id="resultBox">
-        <div class="copied-banner" id="copiedBanner">Đã copy sẵn — dán vào Facebook hoặc Zalo được ngay</div>
+        <div class="copied-banner" id="copiedBanner">Đã sẵn sàng — copy xong, dán Facebook/Zalo được ngay</div>
         <div class="result-link" id="resultLink"></div>
         <div class="btn-row">
           <button class="btn btn-shopee" onclick="openShopee()">Mở Shopee</button>
@@ -431,7 +427,7 @@
           const copied = fastCopy(lastAffLink);
           const banner = document.getElementById("copiedBanner");
           banner.textContent = copied
-            ? "Đã copy sẵn — dán vào Facebook hoặc Zalo được ngay"
+            ? "Đã sẵn sàng — copy xong, dán Facebook/Zalo được ngay"
             : "Đã lấy link — bấm Sao chép lại nếu cần";
           document.getElementById("resultBox").scrollIntoView({ behavior: "smooth", block: "nearest" });
           showToast(copied ? "Xong, đã copy sẵn cho bạn" : "Đã lấy được link");
