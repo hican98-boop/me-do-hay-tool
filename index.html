@@ -95,34 +95,35 @@
       border: 1px solid rgba(238,77,45,0.1);
       margin-bottom: 12px;
     }
-    .badge {
-      display: inline-block;
-      background: linear-gradient(135deg, #fee2e2, #fecaca);
-      color: #b91c1c; font-size: 0.7rem; font-weight: 700;
-      padding: 4px 10px; border-radius: 999px; margin-bottom: 10px;
-    }
     .card-title {
-      font-size: 1.02rem; font-weight: 800; margin-bottom: 4px;
-      display: flex; align-items: center; gap: 6px;
+      font-size: 1.22rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      text-align: center;
+      color: #111827;
+      letter-spacing: -0.01em;
     }
     .card-sub { font-size: 0.88rem; color: var(--muted); margin-bottom: 12px; font-weight: 500; }
 
     .steps {
-      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;
+      display: flex; flex-direction: column; gap: 8px;
       margin-bottom: 14px;
     }
     .step {
       background: #fff7ed; border: 1px solid #fed7aa; border-radius: 12px;
-      padding: 9px 6px; text-align: center;
+      padding: 10px 12px;
+      display: flex; align-items: flex-start; gap: 10px;
+      text-align: left;
     }
     .step .n {
-      width: 22px; height: 22px; border-radius: 50%;
+      flex: 0 0 24px; width: 24px; height: 24px; border-radius: 50%;
       background: var(--primary); color: #fff;
-      font-size: 0.72rem; font-weight: 800;
+      font-size: 0.75rem; font-weight: 800;
       display: inline-flex; align-items: center; justify-content: center;
-      margin-bottom: 3px;
+      margin-top: 1px;
     }
-    .step .t { font-size: 0.72rem; color: #9a3412; font-weight: 600; line-height: 1.3; }
+    .step .t { font-size: 0.84rem; color: #9a3412; font-weight: 600; line-height: 1.4; }
+    .step .t strong { color: #c2410c; font-weight: 800; }
 
     label { display: block; font-size: 0.88rem; font-weight: 700; margin-bottom: 7px; }
     .input-wrap { position: relative; }
@@ -189,11 +190,14 @@
     }
     .result-box.show { display: block; animation: fadeUp .28s ease; }
     .copied-banner {
-      display: flex; align-items: center; justify-content: center; gap: 6px;
-      background: #ecfdf5; color: #065f46;
-      border: 1px solid #a7f3d0; border-radius: 12px;
-      padding: 9px 12px; font-size: 0.86rem; font-weight: 600;
-      margin-bottom: 10px; text-align: center;
+      display: flex; align-items: center; justify-content: center;
+      background: #111827; color: #fff;
+      border: none; border-radius: 999px;
+      padding: 11px 18px; font-size: 0.88rem; font-weight: 600;
+      margin-top: 12px; margin-bottom: 8px; text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+      width: fit-content; max-width: 100%;
+      margin-left: auto; margin-right: auto;
     }
     .result-link {
       display: none !important; /* Ẩn link dài, không cho khách thấy */
@@ -246,8 +250,8 @@
     footer a { color: var(--primary); text-decoration: none; font-weight: 600; }
 
     .toast {
-      position: fixed; bottom: 26px; left: 50%;
-      transform: translateX(-50%) translateY(120px);
+      position: fixed; bottom: 28%; left: 50%;
+      transform: translateX(-50%) translateY(16px);
       background: #111827; color: #fff;
       padding: 11px 20px; border-radius: 999px;
       font-size: 0.88rem; font-weight: 600; font-family: var(--font);
@@ -299,14 +303,12 @@
     </div>
 
     <div class="card">
-      <div class="badge">Miễn phí · Dùng nhanh</div>
       <div class="card-title">Lấy link săn sale</div>
-      <div class="card-sub">Dán link Shopee vào đây (link đầy đủ hoặc link rút gọn đều được)</div>
 
       <div class="steps">
-        <div class="step"><div class="n">1</div><div class="t">Dán link</div></div>
-        <div class="step"><div class="n">2</div><div class="t">Bấm lấy link</div></div>
-        <div class="step"><div class="n">3</div><div class="t">Copy hoặc mở</div></div>
+        <div class="step"><div class="n">1</div><div class="t">Dán link sản phẩm Shopee vào ô bên dưới</div></div>
+        <div class="step"><div class="n">2</div><div class="t">Bấm nút <strong>Lấy link ưu đãi</strong></div></div>
+        <div class="step"><div class="n">3</div><div class="t">Bấm <strong>Mở Shopee</strong> để vào mua, hoặc bấm <strong>Copy &amp; mở FB</strong> rồi <strong>dán link vào bài viết / group Facebook</strong> để lấy ưu đãi từ FB</div></div>
       </div>
 
       <label for="inputLink">Link sản phẩm</label>
@@ -321,7 +323,6 @@
       <div class="hint">Lấy xong là tự copy sẵn, chỉ việc dán đi dùng</div>
 
       <div class="result-box" id="resultBox">
-        <div class="copied-banner" id="copiedBanner">Đã sẵn sàng — copy xong, dán Facebook/Zalo được ngay</div>
         <div class="result-link" id="resultLink"></div>
         <div class="btn-row">
           <button class="btn btn-shopee" onclick="openShopee()">Mở Shopee</button>
@@ -425,10 +426,6 @@
           document.getElementById("resultLink").textContent = lastAffLink;
           document.getElementById("resultBox").classList.add("show");
           const copied = fastCopy(lastAffLink);
-          const banner = document.getElementById("copiedBanner");
-          banner.textContent = copied
-            ? "Đã sẵn sàng — copy xong, dán Facebook/Zalo được ngay"
-            : "Đã lấy link — bấm Sao chép lại nếu cần";
           document.getElementById("resultBox").scrollIntoView({ behavior: "smooth", block: "nearest" });
           showToast(copied ? "Xong, đã copy sẵn cho bạn" : "Đã lấy được link");
         } else {
