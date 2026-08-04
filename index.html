@@ -497,9 +497,14 @@
     };
     // ===== HẾT PHẦN SỬA THÁNG =====
 
+    // sub_id phần 2 = webmedohay — đổi tại đây nếu cần
+    const SUB_ID = "-webmedohay---";
+
     function buildAffLink(originUrl) {
       return "https://s.shopee.vn/an_redir?origin_link=" +
-        encodeURIComponent(originUrl) + "&affiliate_id=" + AFF_ID;
+        encodeURIComponent(originUrl) +
+        "&affiliate_id=" + AFF_ID +
+        "&sub_id=" + encodeURIComponent(SUB_ID);
     }
 
     function openMonthlySale() {
