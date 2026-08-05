@@ -25,21 +25,15 @@
       position: relative;
     }
 
-    /* ========== BACKGROUND MDH ========== */
+    /* BACKGROUND MDH */
     .bg-layer {
       position: absolute;
       inset: 0;
       pointer-events: none;
       z-index: 1;
-      opacity: 0.8;
-      mask-image: linear-gradient(to bottom, black 40%, transparent 95%);
-      -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 95%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .bg-inner {
-      position: relative;
+      opacity: 0.18;
+      mask-image: linear-gradient(to bottom, black 35%, transparent 90%);
+      -webkit-mask-image: linear-gradient(to bottom, black 35%, transparent 90%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -47,51 +41,30 @@
     .bg-text {
       color: #ffffff;
       font-weight: 900;
-      line-height: 1;
+      line-height: 0.85;
       letter-spacing: -0.05em;
       white-space: nowrap;
-      font-size: clamp(180px, 42vw, 720px);
-      transform-origin: center center;
+      font-size: clamp(160px, 40vw, 680px);
       user-select: none;
     }
-    .bg-oval {
-      position: absolute;
-      background: #ffffff;
-      border-radius: 9999px;
-      width: clamp(120px, 20vw, 400px);
-      height: 22vh;
-      transform-origin: center center;
-    }
-    @media (min-width: 640px) {
-      .bg-oval { height: 26vh; }
-    }
-    @media (min-width: 768px) {
-      .bg-oval { height: 50vh; }
-    }
 
-    /* ========== TOP BAR ========== */
+    /* TOP BAR */
     .topbar {
       position: relative;
       z-index: 20;
       display: flex;
       align-items: center;
-      padding: 16px 16px;
-    }
-    @media (min-width: 640px) {
-      .topbar { padding: 20px 24px; }
-    }
-    @media (min-width: 768px) {
-      .topbar { padding: 20px 48px; }
+      padding: 18px 20px;
     }
     .logo {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
     .dots {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2px;
+      gap: 3px;
     }
     .dot {
       width: 10px;
@@ -99,145 +72,82 @@
       background: white;
       border-radius: 50%;
     }
-    @media (min-width: 640px) {
-      .dot { width: 12px; height: 12px; }
-    }
     .logo-text {
       color: white;
       font-weight: 700;
       font-size: 18px;
-      margin-left: 4px;
-    }
-    @media (min-width: 640px) {
-      .logo-text { font-size: 20px; }
     }
 
-    /* ========== CENTER VIDEO ========== */
-    .video-wrap {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-      z-index: 5;
-      margin-top: calc(-6vh - 40px);
-    }
-    .video-box {
-      width: 120vw;
-      height: 85vh;
-    }
-    @media (min-width: 640px) {
-      .video-box {
-        width: 70vw;
-        height: 70vh;
-      }
-    }
-    @media (min-width: 768px) {
-      .video-box {
-        width: 62vw;
-        height: 78vh;
-      }
-    }
-    .video-box video {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      pointer-events: none;
-      mix-blend-mode: darken;
-    }
-
-    /* ========== BOTTOM CONTENT ========== */
-    .bottom {
+    /* MAIN */
+    .main {
       position: relative;
-      z-index: 30;
-      margin-top: auto;
-      padding-bottom: 32px;
+      z-index: 10;
+      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
+      padding: 0 20px 40px;
       text-align: center;
-      padding-left: 16px;
-      padding-right: 16px;
-    }
-    @media (min-width: 640px) {
-      .bottom { padding-bottom: 64px; }
     }
 
-    .bottom h1 {
+    h1 {
       color: white;
-      font-size: 18px;
-      font-weight: 500;
-      margin-bottom: 8px;
+      font-size: clamp(22px, 5.5vw, 32px);
+      font-weight: 700;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.15);
     }
-    @media (min-width: 640px) {
-      .bottom h1 { font-size: 20px; margin-bottom: 10px; }
-    }
-    @media (min-width: 768px) {
-      .bottom h1 { font-size: 24px; }
-    }
-
-    .bottom .desc {
-      color: rgba(255,255,255,0.92);
-      font-size: 14px;
-      line-height: 1.5;
-      max-width: 420px;
-      margin-bottom: 20px;
+    .desc {
+      color: rgba(255,255,255,0.95);
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 400px;
+      margin-bottom: 28px;
     }
 
     .buttons {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 12px;
       justify-content: center;
     }
-
     .btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 12px 22px;
-      border-radius: 9999px;
+      padding: 14px 26px;
+      border-radius: 999px;
       background: white;
       font-weight: 600;
-      font-size: 14px;
+      font-size: 15px;
       text-decoration: none;
       transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
-    }
-    @media (min-width: 640px) {
-      .btn {
-        padding: 14px 26px;
-        font-size: 15px;
-      }
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
     }
     .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 22px rgba(0,0,0,0.15);
+      transform: scale(1.04);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.16);
     }
     .btn-fb { color: #1877F2; }
     .btn-zalo { color: #0068FF; }
     .btn svg {
       width: 18px;
       height: 18px;
-      flex-shrink: 0;
     }
 
     .note {
-      margin-top: 14px;
-      color: rgba(255,255,255,0.7);
-      font-size: 12px;
+      margin-top: 18px;
+      color: rgba(255,255,255,0.75);
+      font-size: 13px;
     }
   </style>
 </head>
 <body>
 
-  <!-- BACKGROUND MDH + OVAL -->
+  <!-- BACKGROUND MDH -->
   <div class="bg-layer">
-    <div class="bg-inner">
-      <div class="bg-text" id="bgText">MDH</div>
-      <div class="bg-oval" id="bgOval"></div>
-    </div>
+    <div class="bg-text">MDH</div>
   </div>
 
   <!-- TOP BAR -->
@@ -253,26 +163,8 @@
     </div>
   </div>
 
-  <!-- CENTER VIDEO -->
-  <div class="video-wrap">
-    <div class="video-box">
-      <video autoplay loop muted playsinline>
-        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260713_234424_b1332b69-2e69-4302-8dbc-40f86846afbd.mp4" type="video/mp4">
-      </video>
-      <video 
-  autoplay 
-  loop 
-  muted 
-  playsinline
-  style="mix-blend-mode: multiply; filter: contrast(1.05);"
->
-  <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260713_234424_b1332b69-2e69-4302-8dbc-40f86846afbd.mp4" type="video/mp4">
-</video>
-    </div>
-  </div>
-
-  <!-- BOTTOM CONTENT -->
-  <div class="bottom">
+  <!-- CONTENT -->
+  <div class="main">
     <h1>Tool đang tạm bảo trì</h1>
     <p class="desc">
       Chúng tôi đang cập nhật theo chính sách mới của Shopee để bảo vệ tài khoản Affiliate.<br>
@@ -292,24 +184,5 @@
 
     <div class="note">Mình sẽ gửi link affiliate cho bạn nhanh nhất có thể</div>
   </div>
-
-  <script>
-    function updateScale() {
-      const textEl = document.getElementById('bgText');
-      const ovalEl = document.getElementById('bgOval');
-      if (!textEl || !ovalEl) return;
-
-      const height = textEl.offsetHeight || 1;
-      const scaleY = (window.innerHeight / height) * 1.4;
-
-      textEl.style.transform = `scale(1.15, ${scaleY})`;
-      ovalEl.style.transform = `scaleY(${scaleY})`;
-    }
-
-    window.addEventListener('load', updateScale);
-    window.addEventListener('resize', updateScale);
-    setTimeout(updateScale, 300);
-    setTimeout(updateScale, 800);
-  </script>
 </body>
 </html>
