@@ -82,14 +82,15 @@ export default function App() {
         style={{ marginTop: 'calc(-6vh - 40px)' }}
       >
         <div className="w-[120vw] h-[85vh] sm:w-[70vw] sm:h-[70vh] md:w-[62vw] md:h-[78vh]">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-contain pointer-events-none mix-blend-darken"
-            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260713_234424_b1332b69-2e69-4302-8dbc-40f86846afbd.mp4"
-          />
+          <video 
+  autoplay 
+  loop 
+  muted 
+  playsinline
+  style="mix-blend-mode: multiply; filter: contrast(1.05);"
+>
+  <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260713_234424_b1332b69-2e69-4302-8dbc-40f86846afbd.mp4" type="video/mp4">
+</video>
         </div>
       </div>
 
