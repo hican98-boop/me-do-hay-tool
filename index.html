@@ -1,88 +1,265 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { ArrowLeft } from 'lucide-react';
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mê Đồ Hay - Tạm bảo trì</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(to bottom, #FF8233, #FDAC55);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
 
-export default function App() {
-  const [scaleY, setScaleY] = useState(1);
-  const textRef = useRef<HTMLDivElement>(null);
+    /* ========== BACKGROUND MDH ========== */
+    .bg-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.8;
+      mask-image: linear-gradient(to bottom, black 40%, transparent 95%);
+      -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 95%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .bg-inner {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .bg-text {
+      color: #ffffff;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      white-space: nowrap;
+      font-size: clamp(180px, 42vw, 720px);
+      transform-origin: center center;
+      user-select: none;
+    }
+    .bg-oval {
+      position: absolute;
+      background: #ffffff;
+      border-radius: 9999px;
+      width: clamp(120px, 20vw, 400px);
+      height: 22vh;
+      transform-origin: center center;
+    }
+    @media (min-width: 640px) {
+      .bg-oval { height: 26vh; }
+    }
+    @media (min-width: 768px) {
+      .bg-oval { height: 50vh; }
+    }
 
-  // Dynamic vertical scale for the big "MDH"
-  useEffect(() => {
-    const updateScale = () => {
-      if (textRef.current) {
-        const height = textRef.current.offsetHeight;
-        if (height > 0) {
-          const scale = window.innerHeight / height;
-          setScaleY(scale);
-        }
+    /* ========== TOP BAR ========== */
+    .topbar {
+      position: relative;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      padding: 16px 16px;
+    }
+    @media (min-width: 640px) {
+      .topbar { padding: 20px 24px; }
+    }
+    @media (min-width: 768px) {
+      .topbar { padding: 20px 48px; }
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dots {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      background: white;
+      border-radius: 50%;
+    }
+    @media (min-width: 640px) {
+      .dot { width: 12px; height: 12px; }
+    }
+    .logo-text {
+      color: white;
+      font-weight: 700;
+      font-size: 18px;
+      margin-left: 4px;
+    }
+    @media (min-width: 640px) {
+      .logo-text { font-size: 20px; }
+    }
+
+    /* ========== CENTER VIDEO ========== */
+    .video-wrap {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 5;
+      margin-top: calc(-6vh - 40px);
+    }
+    .video-box {
+      width: 120vw;
+      height: 85vh;
+    }
+    @media (min-width: 640px) {
+      .video-box {
+        width: 70vw;
+        height: 70vh;
       }
-    };
-    updateScale();
-    window.addEventListener('resize', updateScale);
-    // Chạy lại sau khi font load
-    setTimeout(updateScale, 200);
-    return () => window.removeEventListener('resize', updateScale);
-  }, []);
+    }
+    @media (min-width: 768px) {
+      .video-box {
+        width: 62vw;
+        height: 78vh;
+      }
+    }
+    .video-box video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      pointer-events: none;
+      mix-blend-mode: darken;
+    }
 
-  return (
-    <div
-      className="w-full h-screen overflow-hidden flex flex-col relative"
-      style={{ background: 'linear-gradient(to bottom, #FF8233, #FDAC55)' }}
-    >
-      {/* ========== BACKGROUND "MDH" LAYER ========== */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          opacity: 0.8,
-          maskImage: 'linear-gradient(to bottom, black 40%, transparent 95%)',
-          WebkitMaskImage: 'linear-gradient(to bottom, black 40%, transparent 95%)',
-        }}
-      >
-        <div className="absolute inset-0 flex items-center justify-center">
-          {/* Giant MDH text */}
-          <div
-            ref={textRef}
-            className="text-white font-black leading-none tracking-tighter whitespace-nowrap select-none"
-            style={{
-              fontSize: 'clamp(180px, 42vw, 720px)',
-              transform: `scale(1.15, ${scaleY * 1.4})`,
-            }}
-          >
-            MDH
-          </div>
+    /* ========== BOTTOM CONTENT ========== */
+    .bottom {
+      position: relative;
+      z-index: 30;
+      margin-top: auto;
+      padding-bottom: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    @media (min-width: 640px) {
+      .bottom { padding-bottom: 64px; }
+    }
 
-          {/* White oval overlay */}
-          <div
-            className="absolute rounded-full bg-white"
-            style={{
-              height: 'clamp(22vh, 26vh, 50vh)',
-              width: 'clamp(120px, 20vw, 400px)',
-              transform: `scaleY(${scaleY})`,
-              transformOrigin: 'center',
-            }}
-          />
-        </div>
+    .bottom h1 {
+      color: white;
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    @media (min-width: 640px) {
+      .bottom h1 { font-size: 20px; margin-bottom: 10px; }
+    }
+    @media (min-width: 768px) {
+      .bottom h1 { font-size: 24px; }
+    }
+
+    .bottom .desc {
+      color: rgba(255,255,255,0.92);
+      font-size: 14px;
+      line-height: 1.5;
+      max-width: 420px;
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 9999px;
+      background: white;
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    }
+    @media (min-width: 640px) {
+      .btn {
+        padding: 14px 26px;
+        font-size: 15px;
+      }
+    }
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.15);
+    }
+    .btn-fb { color: #1877F2; }
+    .btn-zalo { color: #0068FF; }
+    .btn svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .note {
+      margin-top: 14px;
+      color: rgba(255,255,255,0.7);
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BACKGROUND MDH + OVAL -->
+  <div class="bg-layer">
+    <div class="bg-inner">
+      <div class="bg-text" id="bgText">MDH</div>
+      <div class="bg-oval" id="bgOval"></div>
+    </div>
+  </div>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="logo">
+      <div class="dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
       </div>
+      <span class="logo-text">Mê Đồ Hay</span>
+    </div>
+  </div>
 
-      {/* ========== TOP BAR ========== */}
-      <nav className="relative z-20 flex items-center justify-between px-4 sm:px-6 md:px-12 py-4 sm:py-5">
-        <div className="flex items-center">
-          <div className="grid grid-cols-2 gap-0.5">
-            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-white rounded-full" />
-            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-white rounded-full" />
-            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-white rounded-full" />
-            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-white rounded-full" />
-          </div>
-          <span className="text-white font-bold text-lg sm:text-xl ml-1">Mê Đồ Hay</span>
-        </div>
-      </nav>
-
-      {/* ========== CENTER VIDEO ========== */}
-      <div
-        className="absolute inset-0 flex items-center justify-center pointer-events-none"
-        style={{ marginTop: 'calc(-6vh - 40px)' }}
-      >
-        <div className="w-[120vw] h-[85vh] sm:w-[70vw] sm:h-[70vh] md:w-[62vw] md:h-[78vh]">
-          <video 
+  <!-- CENTER VIDEO -->
+  <div class="video-wrap">
+    <div class="video-box">
+      <video autoplay loop muted playsinline>
+        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260713_234424_b1332b69-2e69-4302-8dbc-40f86846afbd.mp4" type="video/mp4">
+      </video>
+      <video 
   autoplay 
   loop 
   muted 
@@ -91,45 +268,48 @@ export default function App() {
 >
   <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260713_234424_b1332b69-2e69-4302-8dbc-40f86846afbd.mp4" type="video/mp4">
 </video>
-        </div>
-      </div>
-
-      {/* ========== BOTTOM CONTENT ========== */}
-      <div className="relative z-30 mt-auto pb-8 sm:pb-16 flex flex-col items-center text-center px-4">
-        <h1 className="text-white text-lg sm:text-xl md:text-2xl font-medium mb-2 sm:mb-3">
-          Tool đang tạm bảo trì
-        </h1>
-        <p className="text-white/90 text-sm sm:text-base max-w-md mb-5 leading-relaxed">
-          Chúng tôi đang cập nhật theo chính sách mới của Shopee để bảo vệ tài khoản Affiliate.
-          <br />
-          Hiện tại chưa thể tự chuyển link.
-        </p>
-
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          <a
-            href="https://www.facebook.com/medohaydeal/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 sm:px-7 sm:py-3.5 rounded-full bg-white font-semibold text-sm sm:text-base hover:scale-105 hover:shadow-lg transition-all"
-            style={{ color: '#1877F2' }}
-          >
-            Fanpage
-          </a>
-          <a
-            href="https://zalo.me/0827351354"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 sm:px-7 sm:py-3.5 rounded-full bg-white font-semibold text-sm sm:text-base hover:scale-105 hover:shadow-lg transition-all"
-            style={{ color: '#0068FF' }}
-          >
-            Zalo hỗ trợ
-          </a>
-        </div>
-
-        <p className="text-white/70 text-xs mt-4">
-          Mình sẽ gửi link affiliate cho bạn nhanh nhất có thể
-        </p>
-      </div>
     </div>
-  );
-}
+  </div>
+
+  <!-- BOTTOM CONTENT -->
+  <div class="bottom">
+    <h1>Tool đang tạm bảo trì</h1>
+    <p class="desc">
+      Chúng tôi đang cập nhật theo chính sách mới của Shopee để bảo vệ tài khoản Affiliate.<br>
+      Hiện tại chưa thể tự chuyển link.
+    </p>
+
+    <div class="buttons">
+      <a class="btn btn-fb" href="https://www.facebook.com/medohaydeal/" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        Fanpage
+      </a>
+      <a class="btn btn-zalo" href="https://zalo.me/0827351354" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.54.36 3 .97 4.29L2 22l5.71-.97C9 21.64 10.46 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.3 0-2.53-.3-3.63-.84l-.26-.15-2.72.46.46-2.72-.15-.26C5.3 14.53 5 13.3 5 12c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7z"/><circle cx="8.5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="15.5" cy="12" r="1.2"/></svg>
+        Zalo hỗ trợ
+      </a>
+    </div>
+
+    <div class="note">Mình sẽ gửi link affiliate cho bạn nhanh nhất có thể</div>
+  </div>
+
+  <script>
+    function updateScale() {
+      const textEl = document.getElementById('bgText');
+      const ovalEl = document.getElementById('bgOval');
+      if (!textEl || !ovalEl) return;
+
+      const height = textEl.offsetHeight || 1;
+      const scaleY = (window.innerHeight / height) * 1.4;
+
+      textEl.style.transform = `scale(1.15, ${scaleY})`;
+      ovalEl.style.transform = `scaleY(${scaleY})`;
+    }
+
+    window.addEventListener('load', updateScale);
+    window.addEventListener('resize', updateScale);
+    setTimeout(updateScale, 300);
+    setTimeout(updateScale, 800);
+  </script>
+</body>
+</html>
